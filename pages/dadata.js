@@ -35,7 +35,9 @@ export default function Dadata() {
       </Head>
 
       <main>
-        <Link href={"/"}>главная</Link>
+        <div style={{marginBottom: 40}}>
+          <Link href={"/"}>главная</Link>
+        </div>
         <div className={""}>
           <Multiselect
             closeOnSelect={true}
