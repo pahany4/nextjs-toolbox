@@ -21,9 +21,8 @@ export default function Dadata() {
         .then(function (response) {
           if (response?.data?.length > 0) {
             setResponse(response?.data)
-            console.log(response?.data);
           }
-        })
+        }).catch(error => console.log(error))
     }
   }, [search])
 

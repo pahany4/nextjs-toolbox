@@ -21,14 +21,35 @@ export const handler = async (event) => {
   const response = await fetch(url, options);
   const data = await response.json();
 
-  return {
-    statusCode: 200,
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Accept": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify([
-      ...data.suggestions
-    ])
+  try {
+    return {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify([
+        ...data.suggestions
+      ])
+    }
+  } catch (err) {
+    let statusCode
+    let message
+    if (err.response) {
+      statusCode = err.response.data.statusCode
+      message = err.response.data.message
+    } else {
+      statusCode = 500
+      message = 'Unknown error in request'
+    }
+    console.log(`${statusCode} error from --> ${message}`)
+    return {
+      statusCode,
+      body: JSON.stringify({
+        statusCode,
+        message,
+      }),
+      headers: { 'content-type': 'application/json' },
+    }
   }
 }
