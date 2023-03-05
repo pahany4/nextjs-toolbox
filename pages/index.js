@@ -1,6 +1,7 @@
 import Head from "next/head";
 import axios from "axios";
 import {useState} from "react";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -22,6 +23,9 @@ export default function Home() {
       </Head>
 
       <main>
+        <div style={{marginBottom: 40}}>
+          <Link href={"/dadata"}>dadata</Link>
+        </div>
         <button onClick={handleClick}>Hello world!</button>
         {response &&
           <p>Результат: {response.message}</p>
