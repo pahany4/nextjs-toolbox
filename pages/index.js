@@ -23,8 +23,11 @@ export default function Home() {
       </Head>
 
       <main>
-        <div style={{marginBottom: 40}}>
+        <div style={{marginBottom: 20}}>
           <Link href={"/dadata"}>dadata</Link>
+        </div>
+        <div style={{marginBottom: 20}}>
+          <Link href={"/todo"}>todo</Link>
         </div>
         <button onClick={handleClick}>Hello world!</button>
         {response &&
