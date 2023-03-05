@@ -1,28 +1,33 @@
 import Head from "next/head";
-import Header from "@components/Header";
-import Footer from "@components/Footer";
-import FeedbackForm from "@components/FeedbackForm";
-import JokeBlock from "@components/JokeBlock";
+import axios from "axios";
+import {useState} from "react";
 
 export default function Home() {
+
+  const [response, setResponse] = useState(null)
+  const handleClick = () => {
+    axios.get('/.netlify/functions/hello-world')
+      .then(function (response) {
+        setResponse(response?.data)
+        // handle success
+        console.log(response);
+      })
+  }
+
   return (
     <div className="container">
       <Head>
         <title>Next.js Toolbox</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
 
       <main>
-        <Header title="Next.js Toolbox" />
-        <hr />
-        <p className="description">
-          Here's an example of a Netlify Form! When you fill this out, the
-          submissions can be found in the Netlify Admin site.
-        </p>
-        <FeedbackForm />
-        <JokeBlock />
+        <button onClick={handleClick}>Hello world!</button>
+        {response &&
+          <p>Результат: {response.message}</p>
+        }
       </main>
-      <Footer />
+
     </div>
   );
 }
